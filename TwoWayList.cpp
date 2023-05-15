@@ -106,7 +106,7 @@ public:
     void PrintList() {
         Node* temp = head;
         while (temp != NULL) {
-            cout << temp->data << " ";
+            cout << temp->data << "(" << temp << ")" << endl;
             temp = temp->next;
         }
         cout << endl;
@@ -114,20 +114,68 @@ public:
 
     //############ SECOND part functions ############//
     void Sort(bool reverse = false) {
+        // merge sort and set first element of sorted array
+        this->head = this->mergeSort(this->head);
 
+        // find the last element and set it as a tail
+        for (Node* aux = this->head; aux != nullptr; aux = aux->next) {
+            this->tail = aux;
+        }
     }
 
     void Display() {
 
     }
 
-private:
-    void MergeSort() {
+    void DisplayInverse() {
 
     }
 
-    void Merge() {
+private:
+    Node* mergeSort(Node* first) {
+        if (first == nullptr || first->next == nullptr) {
+            return first;
+        }
 
+        Node* second = split(first);
+        first = mergeSort(first);
+        second = mergeSort(second);
+        return merge(first, second);
+    }
+
+    Node* split(Node* first) {
+        Node* slow = first;
+        Node* fast = first;
+
+        while (fast->next != nullptr && fast->next->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        Node* aux = slow->next;
+        slow->next = nullptr;
+        return aux;
+    }
+
+    Node* merge(Node* first, Node* second) {
+        if (first == nullptr) {
+            return second;
+        }
+        else if (second == nullptr) {
+            return first;
+        }
+        else if (first->data < second->data) {
+            first->next = merge(first->next, second);
+            first->next->prev = first;
+            first->prev = nullptr;
+            return first;
+        }
+        else {
+            second->next = merge(first, second->next);
+            second->next->prev = second;
+            second->prev = nullptr;
+            return second;
+        }
     }
 };
 
@@ -146,7 +194,10 @@ int main() {
     cout << dll.Get() << endl;
     cout << dll.GetAt(2) << endl;
     cout << dll.Pop() << endl;
+
+    cout << "---" << endl;
+    dll.PrintList();
+    dll.Sort();
+    cout << "===" << endl;
     dll.PrintList();
 }
-
-
