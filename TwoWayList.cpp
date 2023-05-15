@@ -124,11 +124,25 @@ public:
     }
 
     void Display() {
-
+        cout << "LIST\n============\n";
+        for (Node* curr = this->head; curr != nullptr; curr = curr->next) {
+            cout << curr->data;
+            if (curr->next != nullptr) {
+                cout << " :-: ";
+            }
+        }
+        cout << endl;
     }
 
     void DisplayInverse() {
-
+        cout << "REVERSE LIST\n============\n";
+        for (Node* curr = this->tail; curr != nullptr; curr = curr->prev) {
+            cout << curr->data;
+            if (curr->prev != nullptr) {
+                cout << " :-: ";
+            }
+        }
+        cout << endl;
     }
 
 private:
@@ -199,5 +213,6 @@ int main() {
     dll.PrintList();
     dll.Sort();
     cout << "===" << endl;
-    dll.PrintList();
+    dll.Display();
+    dll.DisplayInverse();
 }
