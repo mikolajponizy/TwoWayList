@@ -111,6 +111,52 @@ public:
         }
         cout << endl;
     }
+
+    void Sort() {
+        if (head == NULL || head->next == NULL) {
+            // List is empty or contains only one element
+            return;
+        }
+
+        bool swapped;
+        Node* current;
+        Node* last = NULL;
+
+        do {
+            swapped = false;
+            current = head;
+
+            while (current->next != last) {
+                if (current->data > current->next->data) {
+                    // Swap adjacent nodes
+                    int temp = current->data;
+                    current->data = current->next->data;
+                    current->next->data = temp;
+                    swapped = true;
+                }
+                current = current->next;
+            }
+            last = current;
+        } while (swapped);
+
+        // Update the head and tail references
+        Node* temp = head;
+        while (temp->prev != NULL) {
+            temp = temp->prev;
+        }
+        head = temp;
+        tail = current;
+    }
+
+
+    void Display() {
+        Node* temp = head;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
 };
 
 int main() {
@@ -118,15 +164,21 @@ int main() {
     dll.Add(10);
     dll.Add(20);
     dll.Add(30);
-    dll.PrintList();
     dll.Push(40);
-    dll.PrintList();
-    dll.AddAt(50, 2);
-    dll.PrintList();
-    cout << dll.Get() << endl;
-    cout << dll.GetAt(2) << endl;
-    cout << dll.Pop() << endl;
-    dll.PrintList();
-}
+    dll.AddAt(50, 2); 
 
+    cout << "Original list: ";
+    dll.Display();
+
+    cout << "Element from the end of the list: " << dll.Get() << endl;
+    cout << "Element from the exact possition: " << dll.GetAt(2) << endl;
+    cout << "Element from the beginning of a list: " << dll.Pop() << endl;
+
+    dll.Sort();
+
+    cout << "Sorted list: ";
+    dll.Display();
+
+    return 0;
+}
 
