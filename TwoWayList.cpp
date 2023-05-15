@@ -111,7 +111,27 @@ public:
         }
         cout << endl;
     }
+
+    //############ SECOND part functions ############//
+    void Sort(bool reverse = false) {
+
+    }
+
+    void Display() {
+
+    }
+
+private:
+    void MergeSort() {
+
+    }
+
+    void Merge() {
+
+    }
 };
+
+//################ MAIN function ################//
 
 int main() {
     DoubleLinkedList dll;
