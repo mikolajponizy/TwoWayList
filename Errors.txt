@@ -1,0 +1,26 @@
+TwoWayList.cpp:178:17: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+        first = mergeSort(first);
+                ^
+TwoWayList.cpp:179:18: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+        second = mergeSort(second);
+                 ^
+TwoWayList.cpp:205:27: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+            first->next = merge(first->next, second);
+                          ^
+TwoWayList.cpp:211:28: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+            second->next = merge(first, second->next);
+
+
+TwoWayList.cpp:178:17: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+        first = mergeSort(first);
+                ^
+TwoWayList.cpp:179:18: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+        second = mergeSort(second);
+                 ^
+TwoWayList.cpp:205:27: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+            first->next = merge(first->next, second);
+                          ^
+TwoWayList.cpp:211:28: style: misra violation (use --rule-texts=<file> to get proper output) [misra-c2012-17.2]
+            second->next = merge(first, second->next);
+
+

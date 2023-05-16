@@ -16,13 +16,23 @@ public:
         head = NULL;
         tail = NULL;
     }
+    
+    ~DoubleLinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+    }
 
-    void Add(int new_element) {
+void Add(int new_element) {
+    try {
         Node* new_node = new Node;
         new_node->data = new_element;
-        new_node->next = NULL;
-        if (head == NULL) {
-            new_node->prev = NULL;
+        new_node->next = nullptr;
+        if (head == nullptr) {
+            new_node->prev = nullptr;
             head = new_node;
             tail = new_node;
             return;
@@ -30,22 +40,28 @@ public:
         tail->next = new_node;
         new_node->prev = tail;
         tail = new_node;
+    } catch (const std::bad_alloc& e) {
+        cerr << "Error: Failed to allocate memory for a new node." << endl;
+        // Handle the error appropriately (e.g., throw an exception, return an error code)
     }
+}
 
-    void Push(int new_element) {
-        Node* new_node = new Node;
-        new_node->data = new_element;
-        new_node->prev = NULL;
-        if (head == NULL) {
-            new_node->next = NULL;
-            head = new_node;
-            tail = new_node;
-            return;
-        }
-        head->prev = new_node;
-        new_node->next = head;
+void Push(int new_element) {
+    Node* new_node = new Node;
+    new_node->data = new_element;
+    new_node->prev = nullptr;
+    if (head == nullptr) {
+        new_node->next = nullptr;
         head = new_node;
+        tail = new_node;
+        return;
     }
+    head->prev = new_node;
+    new_node->next = head;
+    head = new_node;
+}
+
+
 
     void AddAt(int new_element, int position) {
         Node* new_node = new Node;
@@ -79,12 +95,19 @@ public:
         return temp->data;
     }
 
-    int Pop() {
-        int value = head->data;
-        head = head->next;
-        head->prev = NULL;
-        return value;
+int Pop() {
+    int value = head->data;
+    Node* temp = head;
+    head = head->next;
+    if (head != nullptr) {
+        head->prev = nullptr;
+    } else {
+        tail = nullptr; // Update tail when popping the last element
     }
+    delete temp;
+    return value;
+}
+
 
     int RemoveAt(int position) {
         if (position == 0) {
